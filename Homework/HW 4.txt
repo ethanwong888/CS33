@@ -1,0 +1,31 @@
+Ethan Wong
+CS33
+Discussion 1L
+				   HW 4
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <omp.h>
+
+void transpose(int *dst, int *src, int dim)
+{
+  const int block = 8;
+  int i, j, q, p;
+
+/*#pragma omp parallel for private(j, q, p) collapse (3)*/ /*not sure if we are allowed to use openMP*/
+  for (i = 0; i < dim; i += block)
+    {
+      for (j = 0; j < dim; j += block)
+        {
+	  for (q = i; (q < dim && q < i+block); q++)
+            {
+	      for (p = j; (p < dim && p < j+block); p++)
+			dst[p*dim + q] = src[q*dim + p];
+            }
+        }
+    }
+}
+
+
+I optimized this function by using the "tiling" technique. This, combined with 
+the use of OpenMP pragmas, helped speed up the function considerably.

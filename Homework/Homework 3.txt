@@ -1,0 +1,62 @@
+Ethan Wong
+CS 33
+Professor Reinman
+
+Homework 3
+
+
+#include <stdio.h>
+
+void psum2(float a[], float p[], long n) 
+{ 
+    long i;
+    float last_val, val;
+    last_val = p[0] = a[0];
+     /* last_val holds p[i-1]; val holds p[i] */ 
+    
+    for (i = 1; i < n-1; i+=2) 
+    { 
+        val = last_val + a[i]; 
+        p[i] = val; 
+        //last_val = val + a[i + 1];
+        last_val = last_val + (a[i] + a[i+1]);
+        //setting the even indices of p 		
+        p[i+1] = last_val;
+    } 
+    
+    /* For even n, finish remaining element */		
+    if (i < n) 
+    {
+       p[i] = last_val + a[i];
+    }
+    else
+    {
+       p[i - 1] = last_val; 
+    }
+}
+
+//sample main() to test if function works properly
+int main()
+{
+    float a[7] = {1, 2, 3, 4, 5, 6, 7};
+    float b[7];
+    psum2(a, b, 7);
+}
+
+
+The minimum CPE for a prefix-sum operation, can only get so low in a specific machine.
+There are a multitude of factors that influence how fast a given machine may execute a
+function, such as hardware capabilities and optimization of software (code). In the 
+case of this prefix-sum operation, there is a limit on the loop unrolling due to a 
+there being a limit on how many "add" operations can be performed by the machine at a 
+time. For example, a machine with many ALUs (Arithmetic Logic Units) may be able to 
+achieve a marginally better CPE than a machine with less ALUs. There is also a cap on 
+how fast each addition can be performed by the machine as there is a limit on a 
+machine's throughput. Machines vary in how much information it can process at a time. 
+Therefore, machines with higher throughputs will may have lower CPEs. Again, this is 
+determined by how powerful the hardware of the machine is. From a software perspective,
+latency can be reduced by optimizing the code with methods such as code hoisting, 
+reassociation, and loop unrolling. In this specific problem the reassociation and loop 
+unrolling help increase the CPE by allowing the machine to handle two iterations at a
+time and also performing additions simultaneously because they are independent of each
+other.

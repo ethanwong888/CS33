@@ -1,0 +1,7 @@
+Ethan Wong
+CS33
+Professor Reinman
+Discussion 1L
+				Homework 5
+1. "\nThe value of i is: 7"
+2. E
